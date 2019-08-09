@@ -13,3 +13,23 @@ services:
     environment:
       - NODE_ENV=development
     
+  web-api:
+    build:
+      context: ./services/web-api
+      dockerfile: Dockerfile
+    volumes:
+      - './services/web-api:/usr/src/app'
+    environment:
+      - FLASK_ENV=development
+    ports:
+      - 5001:5000
+
+  db:
+    build:
+      context: ./services/db
+      dockerfile: Dockerfile
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5435:5432
